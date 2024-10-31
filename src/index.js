@@ -20,25 +20,24 @@ startBtn.addEventListener('click', () => {
 
 // ITERATION 2: Start Countdown
 function startCountdown() {
-  console.log('startCountdown called!');
-  // setInterval
 
   startBtn.disabled = true;
   let timer = setInterval(() => {
-    remainingTime -= 1;
     time.textContent = remainingTime;
-    console.log(remainingTime)
-    if (remainingTime <= 10) {
-    toastElement.classList.add('show');
-toastMsg.innerText = '⏰ Final countdown! ⏰';
-    }
-    if (remainingTime === 5) {
-      toastMsg.innerText = 'Start the engines! 💥';
-    }
-    if (remainingTime === 0) {
-      clearInterval(timer);
-      showToast();
-    }
+if (remainingTime === 0) {
+  clearInterval(timer);
+  showToast(' Lift off! 🚀');
+}
+
+// BONUS: ITERATION 5: More Toasts
+if (remainingTime === 10) {
+  showToast('⏰ Final countdown! ⏰');
+}
+
+if (remainingTime === 5) {
+  showToast('Start the engines! 💥');
+}
+    remainingTime--;
   }, 1000);
 
   // Your code goes here ...
@@ -46,9 +45,9 @@ toastMsg.innerText = '⏰ Final countdown! ⏰';
 
 // ITERATION 3: Show Toast
 function showToast(message) {
-  if (remainingTime === 0) {
-    toastElement.classList.add('show');
-  }
+  toastElement.classList.add("show")
+  toastMsg.textContent = message
+
   console.log('showToast called!');
   let removeToast = setTimeout(() => {
     toastElement.classList.remove('show');
@@ -59,5 +58,6 @@ function showToast(message) {
 // BONUS: ITERATION 4: TOAST CLOSE BUTTON
 closeToast.addEventListener('click', () => {
   toastElement.classList.remove('show');
+  clearTimeout(removeToast)
 });
 // Your code goes here ...
